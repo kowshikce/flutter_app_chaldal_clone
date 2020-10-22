@@ -1,10 +1,25 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_chaldal_clone/Providers/AuthProvider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:woocommerce/models/products.dart';
 
-class ProductItem extends StatelessWidget {
+class ProductItem extends StatefulWidget {
+  final WooProduct wooProduct;
+
+  ProductItem(this.wooProduct);
+
+  @override
+  _ProductItemState createState() => _ProductItemState();
+}
+
+class _ProductItemState extends State<ProductItem> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    int _productAmount = Provider.of<AuthProvider>(context, listen: false)
+        .productAmountByNumber(widget.wooProduct.id);
     return Container(
       height: size.height / 12,
       width: double.infinity,
@@ -14,7 +29,7 @@ class ProductItem extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Image.network(
-              "https://toppng.com/uploads/preview/eggs-png-clipart-chicken-e-11563643842otykfobhtk.png",
+              widget.wooProduct.images[0].src,
               fit: BoxFit.cover,
             ),
           ),
@@ -29,11 +44,15 @@ class ProductItem extends StatelessWidget {
                       children: [
                         Expanded(
                           flex: 6,
-                          child: Text(
-                            "Chicken Eggs (Layer)",
-                          ),
+                          child: Text("${widget.wooProduct.name}"),
                         ),
-                        Text("12 pcs")
+                        Text(
+                          "${widget.wooProduct.stockStatus.toLowerCase()}",
+                          style: TextStyle(
+                              color: widget.wooProduct.stockStatus == 'instock'
+                                  ? Colors.green
+                                  : Colors.red),
+                        )
                       ],
                     ),
                   ),
@@ -51,13 +70,13 @@ class ProductItem extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "\$119",
+                                  "\$${widget.wooProduct.regularPrice}",
                                   style: TextStyle(
                                       decoration: TextDecoration.lineThrough,
                                       fontSize: 12),
                                 ),
                                 Text(
-                                  "\$66",
+                                  "\$86",
                                   style: TextStyle(
                                       color: Color(0xFFff666b),
                                       fontSize: 16,
@@ -76,7 +95,40 @@ class ProductItem extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
+                                  _productAmount == 0
+                                      ? SizedBox.shrink()
+                                      : IconButton(
+                                          onPressed: () {
+                                            Provider.of<AuthProvider>(context,
+                                                    listen: false)
+                                                .removeOnSelectedProducts(
+                                                    widget.wooProduct);
+                                          },
+                                          icon: Icon(
+                                            Icons.remove_circle_outline,
+                                            color: Color(0xFFff666b),
+                                          ),
+                                        ),
+                                  _productAmount == 0
+                                      ? SizedBox.shrink()
+                                      : Container(
+                                          width: 25,
+                                          padding: EdgeInsets.only(
+                                              top: 5, bottom: 5),
+                                          child: FittedBox(
+                                              child: Text(
+                                            "$_productAmount",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w400),
+                                          )),
+                                        ),
                                   IconButton(
+                                    onPressed: () {
+                                      Provider.of<AuthProvider>(context,
+                                              listen: false)
+                                          .addOnSelectedProducts(
+                                              widget.wooProduct);
+                                    },
                                     icon: Icon(
                                       Icons.add_circle_outline,
                                       color: Color(0xFFff666b),
