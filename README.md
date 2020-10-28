@@ -21,7 +21,7 @@ Chaldal Clone is a clone Ecommerce App Using Woocommerc Rest API as a Backend.
 
 ![alt_text](https://github.com/kowshikce/flutter_app_chaldal_clone/blob/master/screenshot/Screenshot_%E0%A7%A8%E0%A7%A6%E0%A7%A8%E0%A7%A6%E0%A7%A7%E0%A7%A6%E0%A7%A8%E0%A7%AE_%E0%A7%A8%E0%A7%A9%E0%A7%AA%E0%A7%AA%E0%A7%A8%E0%A7%AD.png)
 
-<h1>Carts Screen/h1>
+<h1>Carts Screen</h1>
   
 ![alt_text](https://github.com/kowshikce/flutter_app_chaldal_clone/blob/master/screenshot/Screenshot_%E0%A7%A8%E0%A7%A6%E0%A7%A8%E0%A7%A6%E0%A7%A7%E0%A7%A6%E0%A7%A8%E0%A7%AE_%E0%A7%A8%E0%A7%A9%E0%A7%AA%E0%A7%AA%E0%A7%A6%E0%A7%A7.png)
   
