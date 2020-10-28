@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_chaldal_clone/Providers/AuthProvider.dart';
+import 'package:flutter_app_chaldal_clone/screens/CartScreen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:woocommerce/models/products.dart';
 import '../Style/CustomColor.dart' as customColor;
@@ -61,7 +62,9 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(
               FontAwesomeIcons.shoppingBasket,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(CartsScreen.routeName);
+            },
             color: customColor.colorPinkish,
           )
         ],
@@ -71,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
           : Column(
               children: [
                 Expanded(
-                  flex: 12,
+                  flex: 18,
                   child: Container(
                     color: Colors.white,
                     child: ListView.builder(
@@ -81,7 +84,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             height: 5,
                           );
                         return Column(
-                          children: [ProductItem(products[index]), Divider()],
+                          children: [
+                            ProductItem(products[index], null),
+                            Divider()
+                          ],
                         );
                       },
                       itemCount: products.length,
@@ -95,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: SizedBox.shrink(),
                         )
                       : Expanded(
-                          flex: 1,
+                          flex: 2,
                           child: Container(
                             color: Color(0xFFff666b),
                             child: Row(

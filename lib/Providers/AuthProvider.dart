@@ -2,15 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:woocommerce/woocommerce.dart';
 
 class AuthProvider extends ChangeNotifier {
-  String _flatConsumerKey = "";
-  String _flatConsumerSecret = "";
-  String _flatBaseUrl = "";
+  String _flatConsumerKey = "your-consumer-key";
+  String _flatConsumerSecret = "your-consumer-secret";
+  String _flatBaseUrl = "baseurl";
+
   WooCommerce wooCommerce;
+
   List<WooProduct> _products = [];
   List<WooProduct> _selectedProducts = [];
 
   List<WooProduct> get selectedItems {
     return [..._selectedProducts];
+  }
+
+  List<WooProduct> get productItems {
+    return [..._products];
   }
 
   AuthProvider() {
@@ -21,7 +27,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<List<WooProduct>> getProducts() async {
-    final featuredProduct = await wooCommerce.getProducts();
+    final featuredProduct = await wooCommerce.getProducts(perPage: 25);
     _products = featuredProduct;
     return [..._products];
   }

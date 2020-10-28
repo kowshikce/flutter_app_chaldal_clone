@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app_chaldal_clone/screens/CartScreen.dart';
+import 'package:flutter_app_chaldal_clone/screens/ProductDetailScreen.dart';
 import './screens/HomeScreen.dart';
 import 'package:provider/provider.dart';
 import './Providers/AuthProvider.dart';
@@ -28,6 +30,10 @@ class MyApp extends StatelessWidget {
               bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
             )),
         home: HomeScreen(),
+        routes: {
+          ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
+          CartsScreen.routeName: (ctx) => CartsScreen(),
+        },
       ),
     );
   }
